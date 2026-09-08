@@ -1,4 +1,5 @@
 # Portal de Idiomas, Juegos y Expansiones
+# Juan Alejandro Sierra - U00178520
 
 Aplicación web desarrollada con Laravel para gestionar un catálogo de idiomas, juegos y expansiones. El proyecto permite registrar, listar, consultar, editar y eliminar registros de cada entidad, además de navegar entre las vistas principales desde una página de inicio temática.
 
