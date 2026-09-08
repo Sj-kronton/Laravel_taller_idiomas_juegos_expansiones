@@ -1,58 +1,101 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Portal de Idiomas, Juegos y Expansiones
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplicación web desarrollada con Laravel para gestionar un catálogo de idiomas, juegos y expansiones. El proyecto permite registrar, listar, consultar, editar y eliminar registros de cada entidad, además de navegar entre las vistas principales desde una página de inicio temática.
 
-## About Laravel
+## Temática
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+La aplicación funciona como una pequeña base de datos editorial y lúdica dedicada al mundo de los videojuegos y los idiomas. Cada juego está relacionado con un idioma base, y cada expansión puede estar vinculada a un juego concreto.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Entidades principales
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- Idiomas: catálogo de idiomas disponibles en el sistema.
+- Juegos: registros de títulos con año y relación al idioma de origen.
+- Expansiones: extensiones o paquetes complementarios de un juego.
 
-## Learning Laravel
+## Funcionalidades
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- Listado de idiomas, juegos y expansiones.
+- Formularios de creación y edición.
+- Vistas de detalle para cada recurso.
+- Resultado de operaciones de guardado, actualización y eliminación.
+- Menú principal de navegación entre recursos.
+- Página de bienvenida con acceso a las distintas entidades.
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Tecnologías
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+- PHP 8.3
+- Laravel 13
+- Blade templates
+- Laravel Sail
+- Query Builder con base de datos
 
-## Agentic Development
+## Instalación
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+1. Clona el repositorio.
+2. Instala dependencias con Composer:
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+composer install
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+3. Copia el archivo de entorno:
 
-## Contributing
+```bash
+cp .env.example .env
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+4. Genera la clave de la aplicación:
 
-## Code of Conduct
+```bash
+php artisan key:generate
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+5. Ejecuta las migraciones:
 
-## Security Vulnerabilities
+```bash
+php artisan migrate
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+6. Inicia el servidor local:
 
-## License
+```bash
+php artisan serve
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Rutas principales
+
+La aplicación expone rutas para consultar y gestionar cada recurso:
+
+```text
+/idiomas
+/idiomas/create
+/idiomas/{id}
+/idiomas/{id}/edit
+
+/juegos
+/juegos/create
+/juegos/{id}
+/juegos/{id}/edit
+
+/expansiones
+/expansiones/create
+/expansiones/{id}
+/expansiones/{id}/edit
+```
+
+## Estructura de trabajo
+
+El proyecto organiza la lógica por controladores, modelos y vistas Blade para cada recurso:
+
+- app/Http/Controllers/
+- app/Models/
+- resources/views/
+- routes/web.php
+
+## Estado
+
+Proyecto de práctica y aprendizaje para construir una aplicación Laravel con CRUD, vistas de recursos y navegación temática entre idiomas, juegos y expansiones.
+
+## Licencia
+
+Este proyecto se distribuye bajo la licencia MIT.
