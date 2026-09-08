@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar expansión</title>
+</head>
+<body>
+    @include('partials.menu')
+
+    <h1>Registrar expansión</h1>
+
+    <form action="/expansiones" method="POST">
+        @csrf
+
+        <div>
+            <label for="titulo">Título:</label>
+            <input type="text" id="titulo" name="titulo" required>
+        </div>
+
+        <div>
+            <label for="juego_id">Juego base:</label>
+            <select id="juego_id" name="juego_id" required>
+                @foreach ($juegos as $juego)
+                    <option value="{{ $juego->id }}">{{ $juego->titulo }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div>
+            <label for="idioma_id">Idioma:</label>
+            <select id="idioma_id" name="idioma_id" required>
+                @foreach ($idiomas as $idioma)
+                    <option value="{{ $idioma->id }}">{{ $idioma->nombre }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <button type="submit">Guardar expansión</button>
+    </form>
+</body>
+</html>
