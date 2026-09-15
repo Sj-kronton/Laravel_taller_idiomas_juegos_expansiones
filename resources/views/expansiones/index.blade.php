@@ -13,7 +13,7 @@
     @if (count($expansiones) > 0)
         <ul>
             @foreach ($expansiones as $expansion)
-                <li>{{ $expansion->titulo }} - {{ $expansion->juego_base }} - {{ $expansion->idioma }}</li>
+                <li>{{ $expansion->titulo }} - {{ $expansion->juego->titulo }} - {{ $expansion->idioma->nombre }}</li>
             @endforeach
         </ul>
     @else

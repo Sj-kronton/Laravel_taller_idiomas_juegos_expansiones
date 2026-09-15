@@ -13,7 +13,7 @@
     @if (count($juegos) > 0)
         <ul>
             @foreach ($juegos as $juego)
-                <li>{{ $juego->titulo }} - {{ $juego->anio }} - {{ $juego->idioma }}</li>
+                <li>{{ $juego->titulo }} - {{ $juego->anio }} - {{ $juego->idioma->nombre }}</li>
             @endforeach
         </ul>
     @else

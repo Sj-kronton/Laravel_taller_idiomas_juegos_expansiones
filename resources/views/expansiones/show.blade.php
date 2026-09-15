@@ -12,8 +12,8 @@
 
     <p><strong>ID:</strong> {{ $expansion->id }}</p>
     <p><strong>Título:</strong> {{ $expansion->titulo }}</p>
-    <p><strong>Juego base:</strong> {{ $expansion->juego_base }}</p>
-    <p><strong>Idioma:</strong> {{ $expansion->idioma }}</p>
+    <p><strong>Juego base:</strong> {{ $expansion->juego->titulo }}</p>
+    <p><strong>Idioma:</strong> {{ $expansion->idioma->nombre }}</p>
 
     <a href="/expansiones">Volver al listado</a>
 </body>

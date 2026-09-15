@@ -25,6 +25,7 @@ Route::delete('/idiomas/{id}', [IdiomaController::class, 'destroy']);
 // Juegos
 Route::get('/juegos', [JuegoController::class, 'index']);
 Route::get('/juegos/create', [JuegoController::class, 'create']);
+Route::get('/juegos/buscar', [JuegoController::class, 'search']);
 Route::get('/juegos/{id}', [JuegoController::class, 'show']);
 Route::get('/juegos/{id}/edit', [JuegoController::class, 'edit']);
 Route::post('/juegos', [JuegoController::class, 'store']);

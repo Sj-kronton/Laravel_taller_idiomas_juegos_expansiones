@@ -13,7 +13,7 @@
     <p><strong>ID:</strong> {{ $juego->id }}</p>
     <p><strong>Título:</strong> {{ $juego->titulo }}</p>
     <p><strong>Año:</strong> {{ $juego->anio }}</p>
-    <p><strong>Idioma:</strong> {{ $juego->idioma }}</p>
+    <p><strong>Idioma:</strong> {{ $juego->idioma->nombre }}</p>
 
     <a href="/juegos">Volver al listado</a>
 </body>

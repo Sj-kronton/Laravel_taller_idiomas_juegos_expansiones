@@ -30,7 +30,10 @@ class IdiomaController extends Controller
     // CREATE
     public function store(Request $request)
     {
-        Idioma::create($request->only(['nombre', 'codigo']));
+        Idioma::create($request->validate([
+            'nombre' => ['required', 'string', 'max:100'],
+            'codigo' => ['required', 'string', 'max:10'],
+        ]));
 
         return view('idiomas.result', [
             'mensaje' => 'Idioma creado correctamente',
@@ -41,7 +44,11 @@ class IdiomaController extends Controller
     // UPDATE
     public function update(Request $request, $id)
     {
-        Idioma::update($id, $request->only(['nombre', 'codigo']));
+        $idioma = Idioma::findOrFail($id);
+        $idioma->update($request->validate([
+            'nombre' => ['required', 'string', 'max:100'],
+            'codigo' => ['required', 'string', 'max:10'],
+        ]));
 
         return view('idiomas.result', [
             'mensaje' => 'Idioma actualizado correctamente',
@@ -52,7 +59,7 @@ class IdiomaController extends Controller
     // DELETE
     public function destroy($id)
     {
-        Idioma::destroy($id);
+        Idioma::findOrFail($id)->delete();
 
         return view('idiomas.result', [
             'mensaje' => 'Idioma borrado correctamente',
@@ -67,11 +74,7 @@ class IdiomaController extends Controller
 
     public function edit($id)
     {
-        $idioma = Idioma::find($id);
-
-        if (!$idioma) {
-            abort(404, 'Idioma no encontrado');
-        }
+        $idioma = Idioma::findOrFail($id);
 
         return view('idiomas.edit', compact('idioma'));
     }

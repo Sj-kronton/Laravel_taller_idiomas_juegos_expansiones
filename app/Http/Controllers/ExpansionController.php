@@ -12,7 +12,7 @@ class ExpansionController extends Controller
     // READ (Todas con JOIN a Juego e Idioma)
     public function index()
     {
-        $expansiones = Expansion::all();
+        $expansiones = Expansion::with(['juego', 'idioma'])->get();
 
         return view('expansiones.index', compact('expansiones'));
     }
@@ -20,11 +20,7 @@ class ExpansionController extends Controller
     // READ (Una)
     public function show($id)
     {
-        $expansion = Expansion::find($id);
-
-        if (!$expansion) {
-            abort(404, 'Expansión no encontrada');
-        }
+        $expansion = Expansion::with(['juego', 'idioma'])->findOrFail($id);
 
         return view('expansiones.show', compact('expansion'));
     }
@@ -32,7 +28,13 @@ class ExpansionController extends Controller
     // CREATE
     public function store(Request $request)
     {
-        Expansion::create($request->only(['juego_id', 'titulo', 'idioma_id']));
+        $datos = $request->validate([
+            'juego_id' => ['required', 'exists:juegos,id'],
+            'titulo' => ['required', 'string', 'max:100'],
+            'idioma_id' => ['required', 'exists:idiomas,id'],
+        ]);
+
+        Expansion::create($datos);
 
         return view('expansiones.result', [
             'mensaje' => 'Expansión creada correctamente',
@@ -43,7 +45,13 @@ class ExpansionController extends Controller
     // UPDATE
     public function update(Request $request, $id)
     {
-        Expansion::update($id, $request->only(['juego_id', 'titulo', 'idioma_id']));
+        $expansion = Expansion::findOrFail($id);
+        $datos = $request->validate([
+            'juego_id' => ['required', 'exists:juegos,id'],
+            'titulo' => ['required', 'string', 'max:100'],
+            'idioma_id' => ['required', 'exists:idiomas,id'],
+        ]);
+        $expansion->update($datos);
 
         return view('expansiones.result', [
             'mensaje' => 'Expansión actualizada correctamente',
@@ -54,7 +62,7 @@ class ExpansionController extends Controller
     // DELETE
     public function destroy($id)
     {
-        Expansion::destroy($id);
+        Expansion::findOrFail($id)->delete();
 
         return view('expansiones.result', [
             'mensaje' => 'Expansión borrada correctamente',
@@ -71,11 +79,7 @@ class ExpansionController extends Controller
 
     public function edit($id)
     {
-        $expansion = Expansion::find($id);
-
-        if (!$expansion) {
-            abort(404, 'Expansión no encontrada');
-        }
+        $expansion = Expansion::findOrFail($id);
 
         $juegos = Juego::all();
         $idiomas = Idioma::all();
