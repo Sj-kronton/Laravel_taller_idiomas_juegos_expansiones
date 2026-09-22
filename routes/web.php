@@ -4,13 +4,32 @@ use App\Http\Controllers\ExpansionController;
 use App\Http\Controllers\IdiomaController;
 use App\Http\Controllers\JuegoController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\CarritoController;
 
-Route::get('/', function () {
+Route::get('/busqueda', function () {
     return view('welcome');
 });
 
 Route::get('/ulibro', function () {
     return view('ulibro');
+});
+
+// Catálogo público (página principal con filtros)
+Route::get('/', [ProductoController::class, 'index'])->name('productos.index');
+
+// Detalle del producto
+Route::get('/productos/{producto}', [ProductoController::class, 'show'])->name('productos.show');
+
+
+
+Route::prefix('admin')->name('productos.')->group(function () {
+    Route::get('/productos', [ProductoController::class, 'admin'])->name('admin');
+    Route::get('/productos/crear', [ProductoController::class, 'create'])->name('create');
+    Route::post('/productos', [ProductoController::class, 'store'])->name('store');
+    Route::get('/productos/{producto}/editar', [ProductoController::class, 'edit'])->name('edit');
+    Route::put('/productos/{producto}', [ProductoController::class, 'update'])->name('update');
+    Route::delete('/productos/{producto}', [ProductoController::class, 'destroy'])->name('destroy');
 });
 
 // Idiomas
@@ -40,3 +59,13 @@ Route::get('/expansiones/{id}/edit', [ExpansionController::class, 'edit']);
 Route::post('/expansiones', [ExpansionController::class, 'store']);
 Route::put('/expansiones/{id}', [ExpansionController::class, 'update']);
 Route::delete('/expansiones/{id}', [ExpansionController::class, 'destroy']);
+
+// Carrito de compras
+Route::get('/carrito', [CarritoController::class, 'index'])->name('carrito.index');
+Route::post('/carrito/add', [CarritoController::class, 'add'])->name('carrito.add');
+Route::post('/carrito/update', [CarritoController::class, 'update'])->name('carrito.update');
+Route::delete('/carrito/{id}', [CarritoController::class, 'remove'])->name('carrito.remove');
+
+// Checkout
+Route::get('/checkout', [CarritoController::class, 'checkout'])->name('carrito.checkout');
+Route::post('/checkout/procesar', [CarritoController::class, 'procesar'])->name('carrito.procesar');
